@@ -14,7 +14,7 @@ For this system, I chose to use Docker to containerize everything for convenienc
 How to run this:
 
 1. Download the repository or run codespaces here in GitHub, and if possible, connect it to VSCode Desktop on your machine. 
-2. Run *docker-compose up* and wait for everything to load up.
+2. Run **`docker-compose up`** and wait for everything to load up.
 3. Once all is up and running, go to PORTS and click the link to the 8080 port. That will go to the pgAdmin login page. Use the following credentials to log in:
     - Email: admin@admin.com
     - Password: root
@@ -27,7 +27,7 @@ How to run this:
     - Password: root
     Then click Save.
 7. That should get you in. Navigate to Databases > weather_data > Schemas > Tables > weather_data, right-click, then View/Edit Data.
-8. To run the Data Analysis Script: `python analyze_data.py`. This will log averages as requested and download a plot of temperatures.
+8. To run the Data Analysis Script: **`python analyze_data.py`**. This will log averages as requested and download a plot of temperatures.
 9. The Cron has also been automatically set up. You can check the file: `upload_daily_weather_data.py` to see the script being used for the Cronjob and the file `cronjob` for the specific schedule.
 10. For Power BI, you can get the data from PostgreSQL by following these steps:
       a. Download the psqlodbc driver: [Download Link](https://ftp.postgresql.org/pub/odbc/releases/REL-17_00_0004-mimalloc/psqlodbc-setup.exe)
