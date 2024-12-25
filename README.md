@@ -35,3 +35,4 @@ How to run this:
       c. Select ODBC.
       d. Set Data Source to None and click the advanced option.
       e. Copy this: `Driver={PostgreSQL ANSI(x64)}; Server=localhost; Port=5432; Database=weather_data`, then connect.
+11. When done, you can run **`docker-compose down`** to remove everything
