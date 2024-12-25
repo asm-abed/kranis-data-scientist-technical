@@ -1,0 +1,4 @@
+# cronjob file
+
+# Run the upload_daily_weather_data.py script at 8 AM every day
+0 8 * * * root /usr/local/bin/python3 /app/upload_daily_weather_data.py >> /var/log/cron.log 2>&1

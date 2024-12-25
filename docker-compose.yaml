@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  pgdatabase:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=weather_data
+    volumes:
+      - "./openmeteo_weather_postgres:/var/lib/postgresql/data:rw"
+    ports:
+      - "5432:5432"
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - "8080:80"
+
+  # Service for your Python script
+  weatherscript:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Optional, defaults to 'Dockerfile'
+    volumes:
+      - .:/app  # Mount the current directory (for easy access to scripts)
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=weather_data
+      - POSTGRES_HOST=pgdatabase  # Connect to the pgdatabase service by its name
+    entrypoint: ["python", "fetch_weather_data.py"]  # Runs your script
+    depends_on:
+      - pgdatabase  # Ensure pgdatabase is up before running the script
+
+  
+  upload_data:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - pgdatabase
+    environment:
+      - PGHOST=pgdatabase
+      - PGUSER=root
+      - PGPASSWORD=root
+      - PGDATABASE=weather_data
+    volumes:
+      - ./app:/app
+    entrypoint: ["cron", "-f"]
+    restart: always
