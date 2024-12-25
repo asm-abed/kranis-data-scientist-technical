@@ -80,7 +80,8 @@ def get_weather_7days(latitude, longitude, city, timezone='Asia/Singapore', weat
         'longitude': longitude,
         'hourly': ['temperature_2m', 'relative_humidity_2m', 'weather_code'],
         'timezone': timezone,
-        'past_days': 7
+        'past_days': 7,
+	    "forecast_days": 1
     }
 
     # Fetch weather data
