@@ -14,9 +14,12 @@ services:
     
   pgadmin:
     image: dpage/pgadmin4
+    restart: always
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
       - PGADMIN_DEFAULT_PASSWORD=root
+      - PGADMIN_CONFIG_PROXY_X_HOST_COUNT= 1
+      - PGADMIN_CONFIG_PROXY_X_PREFIX_COUNT=1
     ports:
       - "8080:80"
 
